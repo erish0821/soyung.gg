@@ -1,0 +1,43 @@
+.match-summary {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.match-id {
+  cursor: pointer;
+}
+
+.match-details {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+}
+
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.team {
+  width: 45%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.team h3 {
+  margin-top: 0;
+}
+
+.items img {
+  width: 32px;
+  height: 32px;
+  margin-right: 4px;
+}
+
+.arrow {
+  font-size: 16px;
+  margin-left: 10px;
+}

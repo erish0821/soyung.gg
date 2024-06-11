@@ -1,0 +1,169 @@
+/* src/App.css */
+
+/* Global font setting */
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* AppBar */
+.MuiAppBar-root {
+  background-color: #1976d2; /* 네비게이션 바 배경색 */
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  margin-right: 20px; /* 타이틀을 약간 오른쪽으로 이동 */
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px; /* 네비게이션 링크 간의 간격 조정 */
+  margin-left: 20px; /* 네비게이션 링크를 왼쪽으로 이동 */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* 사용자 정보를 오른쪽 끝으로 이동 */
+}
+
+.user-info .MuiTypography-root {
+  margin-right: 10px; /* 사용자 정보와 버튼 사이의 간격 조정 */
+}
+
+/* Match Details */
+.match-details {
+  padding: 16px;
+}
+
+.teams-horizontal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.team {
+  flex: 1;
+}
+
+.team h3 {
+  text-align: left;
+}
+
+.participant {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.champion-icon {
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.participant-info {
+  flex: 1;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.items img {
+  width: 40px;
+  height: auto;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Map Guide */
+.map-guide-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.map-container {
+  position: relative;
+  width: 50%;
+  margin-right: 16px; /* 설명과 맵 이미지 사이의 간격 조정 */
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+}
+
+.map-location {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+}
+
+.location-icon {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.location-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(248, 248, 248);
+  pointer-events: none;
+}
+
+.location-description {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 200px;
+  background-color: white;
+}
+
+/* Champion Detail */
+.champion-detail {
+  padding: 20px;
+}
+
+.champion-detail img.champion-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+.champion-detail ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.champion-detail ul li {
+  margin: 5px 0;
+}
+
+.champion-detail h3, .champion-detail h4 {
+  margin-top: 20px;
+}

@@ -1,0 +1,33 @@
+/* index.css */
+/* Tailwind CSS 지시문 제거 */
+
+/* 글로벌 스타일 정의 */
+body {
+  background-color: #f7fafc;
+  color: #2d3748;
+}
+
+a {
+  color: #3182ce;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+header, footer {
+  background-color: #2b6cb0;
+  color: #fff;
+}
+
+button {
+  background-color: #3182ce;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #2b6cb0;
+}
