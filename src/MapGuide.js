@@ -1,7 +1,7 @@
-// src/MapGuide.js
 import React, { useState, useEffect } from "react";
 import { storage } from "./firebase-config";
 import { ref, getDownloadURL } from "firebase/storage";
+import { Box, Paper, Typography } from '@mui/material';
 
 const locations = [
   { name: "탑", x: 15, y: 15, description: "This is location 1" },
@@ -69,14 +69,17 @@ function MapGuide() {
 
   return (
     <div>
-      <h2>맵 가이드</h2>
-      <div className="map-guide-container">
-        <div className="map-container">
+      <Typography variant="h4" gutterBottom>
+        맵 가이드
+      </Typography>
+      <div className="map-guide-container" style={{ display: 'flex', alignItems: 'flex-start' }}>
+        <div className="map-container" style={{ position: 'relative', width: '50%', marginRight: '16px' }}>
           {mapImageUrl && (
             <img
               src={mapImageUrl}
               alt="Map Guide"
               className="map-image"
+              style={{ width: '100%', height: 'auto', borderRadius: '8px' }} // 테두리 둥글게 설정
             />
           )}
           {locations.map((location, index) => (
@@ -84,8 +87,12 @@ function MapGuide() {
               key={index}
               className="map-location"
               style={{
+                position: 'absolute',
                 left: `${location.x}%`,
                 top: `${location.y}%`,
+                width: '30px',
+                height: '30px',
+                transform: 'translate(-50%, -50%)',
               }}
               onMouseOver={() => handleMouseOver(location)}
               onMouseOut={handleMouseOut}
@@ -96,20 +103,36 @@ function MapGuide() {
                   alt={location.name}
                   className="location-icon"
                   style={{
+                    width: '100%',
+                    height: '100%',
+                    pointerEvents: 'none',
                     borderRadius: ["탑", "미드", "바텀"].includes(location.name) ? "0" : "50%"
                   }}
                 />
               ) : (
-                <div className="location-placeholder" />
+                <div
+                  className="location-placeholder"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'red',
+                    pointerEvents: 'none',
+                    borderRadius: ["탑", "미드", "바텀"].includes(location.name) ? "0" : "50%"
+                  }}
+                />
               )}
             </div>
           ))}
         </div>
         {hoveredLocation && (
-          <div className="location-description">
-            <h3>{hoveredLocation.name}</h3>
-            <p>{hoveredLocation.description}</p>
-          </div>
+          <Paper elevation={3} style={{ padding: '10px', border: '1px solid #ccc', width: '200px', backgroundColor: 'white', borderRadius: '8px' }}>
+            <Typography variant="h6" gutterBottom>
+              {hoveredLocation.name}
+            </Typography>
+            <Typography variant="body2">
+              {hoveredLocation.description}
+            </Typography>
+          </Paper>
         )}
       </div>
     </div>

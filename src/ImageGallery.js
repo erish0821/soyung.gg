@@ -1,83 +1,95 @@
-import React, { useEffect, useState } from "react";
-import { storage } from "./firebase-config";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
-import championsData from './champions.json'; // 챔피언 데이터를 가져옵니다.
+// src/ImageGallery.js
+import React, { useState, useEffect } from 'react';
+import { TextField, Container, Box, Typography, Grid } from '@mui/material';
+import { storage } from './firebase-config';
+import { ref, getDownloadURL, listAll } from 'firebase/storage';
+import championsData from './champions.json';
 
-function ImageGallery() {
-  const [imageData, setImageData] = useState([]);
+const ImageGallery = () => {
+  const [championData, setChampionData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, "champion/");
+    const fetchChampions = async () => {
+      const championsRef = ref(storage, "champion/");
       try {
-        const imageRefs = await listAll(imagesRef);
+        const championRefs = await listAll(championsRef);
         const urls = await Promise.all(
-          imageRefs.items.map(async (itemRef) => {
-            const url = await getDownloadURL(itemRef);
-            const name = itemRef.name.replace(".png", "");
-            const champion = championsData.data[name];
-            return { 
-              url, 
-              name, 
-              title: champion ? champion.title : "", 
-              tags: champion ? champion.tags : [] 
-            };
+          championRefs.items.map(async (championRef) => {
+            const url = await getDownloadURL(championRef);
+            const id = championRef.name.replace(".png", "");
+            const champion = championsData.data[id];
+            if (champion) {
+              return { 
+                url, 
+                id, 
+                name: champion.name 
+              };
+            } else {
+              return null; // JSON에 없는 챔피언은 null로 반환
+            }
           })
         );
 
-        // 한글 가나다 순으로 정렬
-        urls.sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
+        // null 값 필터링 및 챔피언 이름으로 정렬
+        const filteredUrls = urls.filter(url => url !== null);
+        filteredUrls.sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
 
-        setImageData(urls);
+        setChampionData(filteredUrls);
       } catch (error) {
-        console.error("Error fetching images: ", error);
+        console.error("Error fetching champions: ", error);
       }
     };
 
-    fetchImages();
+    fetchChampions();
   }, []);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleImageClick = (name) => {
-    navigate(`/champion/${name}`);
-  };
-
-  const filteredImages = imageData.filter((image) =>
-    image.name.includes(searchTerm) ||
-    image.title.includes(searchTerm) ||
-    image.tags.some(tag => tag.includes(searchTerm))
+  const filteredChampions = championData.filter((champion) =>
+    champion.name.includes(searchTerm)
   );
 
   return (
-    <div>
-      <h2>Image Gallery</h2>
-      <input
-        type="text"
-        placeholder="Search by name, title or tag"
-        value={searchTerm}
-        onChange={handleSearch}
-        style={{ marginBottom: "20px", padding: "10px", width: "300px" }}
-      />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {filteredImages.map((image, index) => (
-          <div key={index} style={{ margin: "10px", cursor: "pointer" }} onClick={() => handleImageClick(image.name)}>
-            <img
-              src={image.url}
-              alt={image.name}
-              style={{ width: "200px" }}
+    <Container>
+      <Box mb={4}>
+        <Typography variant="h4" gutterBottom>
+          챔피언 가이드
+        </Typography>
+        <Grid container spacing={2} justifyContent="flex-start">
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              label="챔피언 검색"
+              variant="outlined"
+              value={searchTerm}
+              onChange={handleSearch}
+              sx={{ 
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderRadius: '30px',
+                  },
+                },
+              }}
             />
-            <p>{image.name} ({image.title})</p>
-            <p>{image.tags.join(', ')}</p>
-          </div>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box display="flex" flexWrap="wrap" gap={2}>
+        {filteredChampions.map((champion, index) => (
+          <Box key={index} textAlign="center" border={1} borderRadius={2} p={2} width="150px">
+            <img
+              src={champion.url}
+              alt={champion.name}
+              style={{ width: "100px", height: "auto", borderRadius: "8px" }}
+            />
+            <Typography variant="body2" mt={1}>{champion.name}</Typography>
+          </Box>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 }
 

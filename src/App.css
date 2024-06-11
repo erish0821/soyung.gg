@@ -3,6 +3,7 @@
 /* Global font setting */
 * {
   font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -31,7 +32,6 @@
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .nav-links a:hover {
@@ -46,6 +46,55 @@
 
 .user-info .MuiTypography-root {
   margin-right: 10px; /* 사용자 정보와 버튼 사이의 간격 조정 */
+}
+
+/* Logo hover effect */
+.logo-link {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease-in-out;
+}
+
+.logo-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -3px;
+  left: 0;
+  background-color: #ffffff;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-link:hover {
+  color: #95fff1; /* 원하는 호버 색상으로 변경 */
+}
+
+.logo-link:hover::after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.logo-link:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%);
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: transform 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.logo-link:hover::before {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0;
 }
 
 /* Match Details */
@@ -166,4 +215,21 @@
 
 .champion-detail h3, .champion-detail h4 {
   margin-top: 20px;
+}
+
+/* App Layout */
+body, html, #root {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.min-h-screen {
+  min-height: 100vh;
 }

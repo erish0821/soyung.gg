@@ -6,7 +6,7 @@ import ImageGallery from "./ImageGallery";
 function ChampionGuide() {
   return (
     <div>
-      <h2>챔피언 가이드</h2>
+
       <ImageGallery />
     </div>
   );

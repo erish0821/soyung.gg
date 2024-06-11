@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { storage } from "./firebase-config";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { Link, useNavigate } from "react-router-dom";
+// src/ItemGuide.js
+import React, { useState, useEffect } from 'react';
+import { TextField, Container, Box, Typography, Grid } from '@mui/material';
+import { storage } from './firebase-config';
+import { ref, getDownloadURL, listAll } from 'firebase/storage';
 import itemsData from './items.json'; // 아이템 데이터를 가져옵니다.
+import { useNavigate } from 'react-router-dom';
 
 function ItemGuide() {
   const [itemData, setItemData] = useState([]);
@@ -57,28 +59,44 @@ function ItemGuide() {
   );
 
   return (
-    <div>
-      <h2>아이템 가이드</h2>
-      <input
-        type="text"
-        placeholder="아이템 이름으로 검색"
-        value={searchTerm}
-        onChange={handleSearch}
-        style={{ marginBottom: "20px", padding: "10px", width: "300px" }}
-      />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <Container>
+      <Box mb={4}>
+        <Typography variant="h4" gutterBottom>
+          아이템 가이드
+        </Typography>
+        <Grid container spacing={2} justifyContent="flex-start">
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              label="아이템 검색"
+              variant="outlined"
+              value={searchTerm}
+              onChange={handleSearch}
+              sx={{ 
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderRadius: '30px',
+                  },
+                },
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box display="flex" flexWrap="wrap" gap={2}>
         {filteredItems.map((item, index) => (
-          <div key={index} style={{ margin: "10px", cursor: "pointer" }} onClick={() => handleItemClick(item.id)}>
+          <Box key={index} textAlign="center" border={1} borderRadius={2} p={2} width="150px">
             <img
               src={item.url}
               alt={item.name}
-              style={{ width: "200px" }}
+              style={{ width: "100px", height: "auto", borderRadius: "8px" }}
+              onClick={() => handleItemClick(item.id)}
             />
-            <p>{item.name}</p>
-          </div>
+            <Typography variant="body2" mt={1}>{item.name}</Typography>
+          </Box>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 }
 

@@ -1,7 +1,7 @@
 export const fetchMatchHistory = async (summonerNameTag) => {
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
     const riotApiUrl = 'https://asia.api.riotgames.com';
-    const apiKey = 'RGAPI-a63a709b-cf06-423f-b25b-50520715cc5b';
+    const apiKey = 'RGAPI-a4dc668a-0e92-45eb-a779-decb2ace960b';
     const [summonerName, tagLine] = summonerNameTag.split("#");
   
     if (!summonerName || !tagLine) {
@@ -38,7 +38,7 @@ export const fetchMatchHistory = async (summonerNameTag) => {
   export const fetchMatchDetails = async (matchId) => {
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
     const riotApiUrl = 'https://asia.api.riotgames.com';
-    const apiKey = 'RGAPI-a63a709b-cf06-423f-b25b-50520715cc5b';
+    const apiKey = 'RGAPI-a4dc668a-0e92-45eb-a779-decb2ace960b';
   
     try {
       const response = await fetch(

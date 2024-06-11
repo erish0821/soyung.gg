@@ -1,4 +1,4 @@
-// src/App.jss
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
@@ -15,13 +15,13 @@ import CreatePost from './CreatePost';
 import CreateSuggestion from './CreateSuggestion';
 import Header from './Header';
 import Footer from './Footer';
-import { CssBaseline, Container } from '@mui/material';
+import { CssBaseline, Container, Box } from '@mui/material';
 
 function App() {
   return (
     <Router>
       <CssBaseline />
-      <div className="flex flex-col min-h-screen">
+      <Box className="flex flex-col min-h-screen">
         <Header />
         <Container component="main" sx={{ flexGrow: 1, p: 4 }}>
           <Routes>
@@ -40,7 +40,7 @@ function App() {
           </Routes>
         </Container>
         <Footer />
-      </div>
+      </Box>
     </Router>
   );
 }

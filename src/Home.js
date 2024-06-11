@@ -1,4 +1,3 @@
-// src/Home.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, TextField, Button, Typography, Box, Grid } from '@mui/material';
@@ -33,7 +32,7 @@ const Home = () => {
         <Typography variant="h4" gutterBottom>
           전적 검색
         </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={8}>
             <TextField
               fullWidth
@@ -44,7 +43,13 @@ const Home = () => {
             />
           </Grid>
           <Grid item xs={12} md={4}>
-            <Button fullWidth variant="contained" color="primary" onClick={handleFetchMatchHistory}>
+            <Button 
+              fullWidth 
+              variant="contained" 
+              color="primary" 
+              onClick={handleFetchMatchHistory}
+              sx={{ width: '30%', height: '400%' }} // 버튼의 높이를 텍스트 필드와 동일하게 맞춤
+            >
               전적 검색
             </Button>
           </Grid>
@@ -63,7 +68,7 @@ const Home = () => {
 const MatchHistoryList = ({ matchHistory, selectedMatchId, onSelectMatch, puuid }) => (
   <Box>
     <Typography variant="h5" gutterBottom>
-      최근 전적
+      매치 리스트
     </Typography>
     {matchHistory.map((matchId) => (
       <MatchSummary

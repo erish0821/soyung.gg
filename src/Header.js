@@ -8,7 +8,7 @@ const Header = () => (
   <AppBar position="static">
     <Toolbar className="toolbar">
       <Typography variant="h6" component="div" className="title">
-        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>리그 오브 레전드</Link>
+        <Link to="/" className="logo-link">SOYUNG.GG</Link>
       </Typography>
       <Box className="nav-links">
         <Button color="inherit" component={Link} to="/">전적 검색</Button>
